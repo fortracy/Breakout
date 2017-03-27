@@ -97,7 +97,7 @@ void Game::Update(GLfloat dt)
     // Update particles
     Particles->Update(dt, *Ball, 2,{Ball->Radius / 2,Ball->Radius / 2});
     // Update PowerUps
-    this->UpdatePowerUps(dt);
+   // this->UpdatePowerUps(dt);
     // Reduce shake time
     if (ShakeTime > 0.0f)
     {
@@ -340,7 +340,7 @@ void Game::DoCollisions()
                 if (!box.isSolid)
                 {
                     box.Destroyed = GL_TRUE;
-                    this->SpawnPowerUps(box);
+                  //  this->SpawnPowerUps(box);
                 }
                 else
                 {   // if block is solid, enable shake effect
@@ -412,7 +412,7 @@ void Game::DoCollisions()
        Ball->Velocity = GLKVector2Normalize(Ball->Velocity)*GLKVector2Length(oldVelocity);
        // Ball->Velocity = glm::normalize(Ball->Velocity) * glm::length(oldVelocity); // Keep speed consistent over both axes (multiply by length of old velocity, so total strength is not changed)
         // Fix sticky paddle
-        Ball->Velocity.y = -1 * abs(Ball->Velocity.y);
+        Ball->Velocity.y = -1 * std::abs(Ball->Velocity.y);
         
         // If Sticky powerup is activated, also stick ball to paddle once new velocity vectors were calculated
         Ball->Stuck = Ball->Sticky;

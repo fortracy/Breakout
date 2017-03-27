@@ -7,8 +7,12 @@
 //
 
 #import "ViewController.h"
+#include "GameEngine/Game.hpp"
 
-@interface ViewController ()
+@interface ViewController ()<GLKViewControllerDelegate>
+{
+    Game *breakout;
+}
 
 @end
 
@@ -16,6 +20,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    CGFloat width = CGRectGetWidth([UIScreen mainScreen].bounds);
+    CGFloat height = CGRectGetHeight([UIScreen mainScreen].bounds);
+    
+    
+    breakout = new Game(width,height);
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -24,6 +34,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void) glkView:(GLKView *)view drawInRect:(CGRect)rect
+{
+    breakout->Render();
+}
+
+
+- (void) glkViewControllerUpdate:(GLKViewController *)controller
+{
+    NSTimeInterval update = controller.timeSinceLastUpdate;
+    breakout->Update(update);
+}
+
 
 
 @end

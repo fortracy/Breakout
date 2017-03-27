@@ -71,8 +71,8 @@ public:
     void ResetLevel();
     void ResetPlayer();
     // Powerups
-    void SpawnPowerUps(GameObject &block);
-    void UpdatePowerUps(GLfloat dt);
+  //  void SpawnPowerUps(GameObject &block);
+  //  void UpdatePowerUps(GLfloat dt);
 };
 
 

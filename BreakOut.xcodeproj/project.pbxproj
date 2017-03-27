@@ -26,6 +26,7 @@
 		6B52369F1E88F08A0049832C /* SpriteRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B5236921E88F08A0049832C /* SpriteRender.cpp */; };
 		6B5236A01E88F08A0049832C /* TextRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B5236941E88F08A0049832C /* TextRender.cpp */; };
 		6B5236A11E88F08A0049832C /* Texture2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B5236961E88F08A0049832C /* Texture2D.cpp */; };
+		6B5236A71E890D600049832C /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5236A61E890D600049832C /* GLKit.framework */; };
 		6B9483B51E83C5C200DB26F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9483B41E83C5C200DB26F0 /* main.m */; };
 		6B9483B81E83C5C200DB26F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9483B71E83C5C200DB26F0 /* AppDelegate.m */; };
 		6B9483BB1E83C5C200DB26F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9483BA1E83C5C200DB26F0 /* ViewController.m */; };
@@ -65,6 +66,7 @@
 		6B5236951E88F08A0049832C /* TextRender.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextRender.hpp; sourceTree = "<group>"; };
 		6B5236961E88F08A0049832C /* Texture2D.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Texture2D.cpp; sourceTree = "<group>"; };
 		6B5236A21E88F0F20049832C /* Texture2D.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Texture2D.hpp; sourceTree = "<group>"; };
+		6B5236A61E890D600049832C /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		6B5369321E86181300A2622E /* GLKMath_cpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMath_cpp.h; sourceTree = "<group>"; };
 		6B5369331E86181300A2622E /* GLKMatrix3_cpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMatrix3_cpp.h; sourceTree = "<group>"; };
 		6B5369341E86181300A2622E /* GLKMatrix4_cpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMatrix4_cpp.h; sourceTree = "<group>"; };
@@ -77,7 +79,7 @@
 		6B9483B61E83C5C200DB26F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6B9483B71E83C5C200DB26F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6B9483B91E83C5C200DB26F0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6B9483BA1E83C5C200DB26F0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6B9483BA1E83C5C200DB26F0 /* ViewController.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = ViewController.m; sourceTree = "<group>"; };
 		6B9483BD1E83C5C200DB26F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B9483BF1E83C5C200DB26F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B9483C21E83C5C200DB26F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B5236A71E890D600049832C /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +142,14 @@
 			path = GameEngine;
 			sourceTree = "<group>";
 		};
+		6B5236A51E890D600049832C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B5236A61E890D600049832C /* GLKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6B5369311E8617EF00A2622E /* GLKitCPP */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +169,7 @@
 			children = (
 				6B9483B21E83C5C200DB26F0 /* BreakOut */,
 				6B9483B11E83C5C200DB26F0 /* Products */,
+				6B5236A51E890D600049832C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
