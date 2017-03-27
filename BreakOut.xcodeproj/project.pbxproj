@@ -64,6 +64,7 @@
 		6B5236941E88F08A0049832C /* TextRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextRender.cpp; sourceTree = "<group>"; };
 		6B5236951E88F08A0049832C /* TextRender.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextRender.hpp; sourceTree = "<group>"; };
 		6B5236961E88F08A0049832C /* Texture2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture2D.cpp; sourceTree = "<group>"; };
+		6B5236A21E88F0F20049832C /* Texture2D.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Texture2D.hpp; sourceTree = "<group>"; };
 		6B5369321E86181300A2622E /* GLKMath_cpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMath_cpp.h; sourceTree = "<group>"; };
 		6B5369331E86181300A2622E /* GLKMatrix3_cpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMatrix3_cpp.h; sourceTree = "<group>"; };
 		6B5369341E86181300A2622E /* GLKMatrix4_cpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMatrix4_cpp.h; sourceTree = "<group>"; };
@@ -112,6 +113,7 @@
 		6B5236811E88F0400049832C /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				6B5236A21E88F0F20049832C /* Texture2D.hpp */,
 				6B5236821E88F08A0049832C /* BallObject.cpp */,
 				6B5236831E88F08A0049832C /* BallObject.hpp */,
 				6B5236841E88F08A0049832C /* Game.cpp */,
