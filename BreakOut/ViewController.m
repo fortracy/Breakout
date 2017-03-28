@@ -12,6 +12,7 @@
 @interface ViewController ()<GLKViewControllerDelegate>
 {
     Game *breakout;
+    GLKView *_kView;
 }
 
 @end
@@ -25,7 +26,24 @@
     CGFloat height = CGRectGetHeight([UIScreen mainScreen].bounds);
     
     
+    
+    UIView *view = self.view;
+    if ([view isKindOfClass:[GLKView class]]) {
+        GLKView *kView = (GLKView *)view;
+        self.delegate = self;
+        _kView = kView;
+        
+        // Create an OpenGL ES context and assign it to the view loaded from storyboard
+        _kView.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+        [EAGLContext setCurrentContext:_kView.context];
+        
+        // Set animation frame rate
+        self.preferredFramesPerSecond = 60;
+    }
     breakout = new Game(width,height);
+
+    
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 

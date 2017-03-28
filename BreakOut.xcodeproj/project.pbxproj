@@ -98,7 +98,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6B2BD8F91E84FDEB00081BBF /* shader */ = {
+		6B2BD8F91E84FDEB00081BBF /* shaders */ = {
 			isa = PBXGroup;
 			children = (
 				6B2BD8FA1E84FE7700081BBF /* sprite.frag */,
@@ -110,6 +110,7 @@
 				6B52367B1E88E9F60049832C /* particle.vs */,
 				6B52367D1E88EA0F0049832C /* particle.frag */,
 			);
+			name = shaders;
 			path = shader;
 			sourceTree = "<group>";
 		};
@@ -195,7 +196,7 @@
 				6B9483C11E83C5C200DB26F0 /* LaunchScreen.storyboard */,
 				6B9483C41E83C5C200DB26F0 /* Info.plist */,
 				6B9483B31E83C5C200DB26F0 /* Supporting Files */,
-				6B2BD8F91E84FDEB00081BBF /* shader */,
+				6B2BD8F91E84FDEB00081BBF /* shaders */,
 			);
 			path = BreakOut;
 			sourceTree = "<group>";

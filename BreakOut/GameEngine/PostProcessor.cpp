@@ -13,16 +13,23 @@
 PostProcessor::PostProcessor(Shader shader, GLuint width, GLuint height)
 : PostProcessingShader(shader), Texture(), Width(width), Height(height), Confuse(GL_FALSE), Chaos(GL_FALSE), Shake(GL_FALSE)
 {
+    this->MSFBO = 0;
+    this ->FBO = 0;
+    this->RBO = 0;
     // Initialize renderbuffer/framebuffer object
     glGenFramebuffers(1, &this->MSFBO);
     glGenFramebuffers(1, &this->FBO);
     glGenRenderbuffers(1, &this->RBO);
+    
     
     // Initialize renderbuffer storage with a multisampled color buffer (don't need a depth/stencil buffer)
     glBindFramebuffer(GL_FRAMEBUFFER, this->MSFBO);
     glBindRenderbuffer(GL_RENDERBUFFER, this->RBO);
     glRenderbufferStorageMultisample(GL_RENDERBUFFER, 8, GL_RGB, width, height); // Allocate storage for render buffer object
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, this->RBO); // Attach MS render buffer object to framebuffer
+    
+    GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         std::cout << "ERROR::POSTPROCESSOR: Failed to initialize MSFBO" << std::endl;
     

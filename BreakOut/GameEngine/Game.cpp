@@ -27,7 +27,7 @@ GLfloat            ShakeTime = 0.0f;
 Game::Game(GLuint width, GLuint height)
 : State(GAME_ACTIVE), Keys(), Width(width), Height(height)
 {
-    
+    Init();
 }
 
 Game::~Game()
@@ -42,9 +42,9 @@ Game::~Game()
 void Game::Init()
 {
     // Load shaders
-    ResourceManager::LoadShader("shaders/sprite.vs", "shaders/sprite.frag", nullptr, "sprite");
-    ResourceManager::LoadShader("shaders/particle.vs", "shaders/particle.frag", nullptr, "particle");
-    ResourceManager::LoadShader("shaders/postProcess.vs", "shaders/postProcess.frag", nullptr, "postprocessing");
+    ResourceManager::LoadShader("sprite.vs", "sprite.frag", nullptr, "sprite");
+    ResourceManager::LoadShader("particle.vs", "particle.frag", nullptr, "particle");
+    ResourceManager::LoadShader("postProcess.vs", "postProcess.frag", nullptr, "postprocessing");
     // Configure shaders
     GLKMatrix4 projection = GLKMatrix4MakeOrtho(0.0f, static_cast<GLfloat>(this->Width), static_cast<GLfloat>(this->Height), 0.0f, -1.0f, 1.0f);
     
@@ -55,18 +55,18 @@ void Game::Init()
     ResourceManager::GetShader("particle").Use().SetInteger("sprite", 0);
     ResourceManager::GetShader("particle").SetMatrix4("projection", projection);
     // Load textures
-    ResourceManager::LoadTexture("textures/background.jpg", GL_FALSE, "background");
-    ResourceManager::LoadTexture("textures/awesomeface.png", GL_TRUE, "face");
-    ResourceManager::LoadTexture("textures/block.png", GL_FALSE, "block");
-    ResourceManager::LoadTexture("textures/block_solid.png", GL_FALSE, "block_solid");
-    ResourceManager::LoadTexture("textures/paddle.png", GL_TRUE, "paddle");
-    ResourceManager::LoadTexture("textures/particle.png", GL_TRUE, "particle");
-    ResourceManager::LoadTexture("textures/powerup_speed.png", GL_TRUE, "powerup_speed");
-    ResourceManager::LoadTexture("textures/powerup_sticky.png", GL_TRUE, "powerup_sticky");
-    ResourceManager::LoadTexture("textures/powerup_increase.png", GL_TRUE, "powerup_increase");
-    ResourceManager::LoadTexture("textures/powerup_confuse.png", GL_TRUE, "powerup_confuse");
-    ResourceManager::LoadTexture("textures/powerup_chaos.png", GL_TRUE, "powerup_chaos");
-    ResourceManager::LoadTexture("textures/powerup_passthrough.png", GL_TRUE, "powerup_passthrough");
+    ResourceManager::LoadTexture("background.jpg", GL_FALSE, "background");
+    ResourceManager::LoadTexture("awesomeface.png", GL_TRUE, "face");
+    ResourceManager::LoadTexture("block.png", GL_FALSE, "block");
+    ResourceManager::LoadTexture("block_solid.png", GL_FALSE, "block_solid");
+    ResourceManager::LoadTexture("paddle.png", GL_TRUE, "paddle");
+    ResourceManager::LoadTexture("particle.png", GL_TRUE, "particle");
+  //  ResourceManager::LoadTexture("textures/powerup_speed.png", GL_TRUE, "powerup_speed");
+  //  ResourceManager::LoadTexture("textures/powerup_sticky.png", GL_TRUE, "powerup_sticky");
+  //  ResourceManager::LoadTexture("textures/powerup_increase.png", GL_TRUE, "powerup_increase");
+  //  ResourceManager::LoadTexture("textures/powerup_confuse.png", GL_TRUE, "powerup_confuse");
+  //  ResourceManager::LoadTexture("textures/powerup_chaos.png", GL_TRUE, "powerup_chaos");
+  //  ResourceManager::LoadTexture("textures/powerup_passthrough.png", GL_TRUE, "powerup_passthrough");
     // Set render-specific controls
     Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
     Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);

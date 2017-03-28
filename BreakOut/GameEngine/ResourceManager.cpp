@@ -17,9 +17,34 @@ std::map<std::string, Texture2D>    ResourceManager::Textures;
 std::map<std::string, Shader>       ResourceManager::Shaders;
 
 
+
+
+const GLchar * fullPath(const GLchar *filename)
+{
+    const GLchar *fullPath = nullptr;
+    if (filename) {
+        NSString *fileName = [NSString stringWithUTF8String:filename];
+        NSString *FullPath = [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
+        fullPath = FullPath.UTF8String;
+    }
+
+    return fullPath;
+    
+}
+
+
+
 Shader ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
 {
-    Shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
+    const GLchar * vShaderPath = fullPath(vShaderFile);
+    const GLchar * fShaderPath = fullPath(fShaderFile);
+    const GLchar * gShaderPath = fullPath(gShaderFile);
+
+    
+    
+    
+    
+    Shaders[name] = loadShaderFromFile(vShaderPath, fShaderPath, gShaderPath);
     return Shaders[name];
 }
 
@@ -93,6 +118,110 @@ Shader ResourceManager::loadShaderFromFile(const GLchar *vShaderFile, const GLch
     return shader;
 }
 
+CGContextRef newBitmapRGBA8ContextFromImage(CGImageRef image);
+
+unsigned char * convertUIImageToBitmapRGBA8(UIImage * image)
+{
+    
+    CGImageRef imageRef = image.CGImage;
+    
+    // Create a bitmap context to draw the uiimage into
+    CGContextRef context =  newBitmapRGBA8ContextFromImage(imageRef);
+   // CGContextRef context = NULL;
+    
+    if(!context) {
+        return NULL;
+    }
+    
+    size_t width = CGImageGetWidth(imageRef);
+    size_t height = CGImageGetHeight(imageRef);
+    
+    CGRect rect = CGRectMake(0, 0, width, height);
+    
+    // Draw image into the context to get the raw image data
+    CGContextDrawImage(context, rect, imageRef);
+    
+    // Get a pointer to the data
+    unsigned char *bitmapData = (unsigned char *)CGBitmapContextGetData(context);
+    
+    // Copy the data and release the memory (return memory allocated with new)
+    size_t bytesPerRow = CGBitmapContextGetBytesPerRow(context);
+    size_t bufferLength = bytesPerRow * height;
+    
+    unsigned char *newBitmap = NULL;
+    
+    if(bitmapData) {
+        newBitmap = (unsigned char *)malloc(sizeof(unsigned char) * bytesPerRow * height);
+        
+        if(newBitmap) {    // Copy the data
+            for(int i = 0; i < bufferLength; ++i) {
+                newBitmap[i] = bitmapData[i];
+            }
+        }
+        
+        free(bitmapData);
+        
+    } else {
+        NSLog(@"Error getting bitmap pixel data\n");
+    }
+    
+    CGContextRelease(context);
+    
+    return newBitmap;
+}
+
+CGContextRef newBitmapRGBA8ContextFromImage(CGImageRef image) {
+    CGContextRef context = NULL;
+    CGColorSpaceRef colorSpace;
+    uint32_t *bitmapData;
+    
+    size_t bitsPerPixel = 32;
+    size_t bitsPerComponent = 8;
+    size_t bytesPerPixel = bitsPerPixel / bitsPerComponent;
+    
+    size_t width = CGImageGetWidth(image);
+    size_t height = CGImageGetHeight(image);
+    
+    size_t bytesPerRow = width * bytesPerPixel;
+    size_t bufferLength = bytesPerRow * height;
+    
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    if(!colorSpace) {
+        NSLog(@"Error allocating color space RGB\n");
+        return NULL;
+    }
+    
+    // Allocate memory for image data
+    bitmapData = (uint32_t *)malloc(bufferLength);
+    
+    if(!bitmapData) {
+        NSLog(@"Error allocating memory for bitmap\n");
+        CGColorSpaceRelease(colorSpace);
+        return NULL;
+    }
+    
+    //Create bitmap context
+    
+    context = CGBitmapContextCreate(bitmapData,
+                                    width,
+                                    height,
+                                    bitsPerComponent,
+                                    bytesPerRow,
+                                    colorSpace,
+                                    kCGImageAlphaPremultipliedLast);    // RGBA
+    if(!context) {
+        free(bitmapData);
+        NSLog(@"Bitmap context not created");
+    }
+    
+    CGColorSpaceRelease(colorSpace);
+    
+    return context;
+}
+
+
+
 Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alpha)
 {
     Texture2D texture;
@@ -103,8 +232,13 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
     }
     int width, height;
     unsigned char*image;
-    //image = SOIL_load_image(file, &width, &height, 0, texture.Image_Format == GL_RGBA ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
+    UIImage *uiImage = [UIImage imageNamed:[NSString stringWithUTF8String:file]];
+    width = CGImageGetWidth(uiImage.CGImage);
+    height = CGImageGetHeight(uiImage.CGImage);
+   
+    image = convertUIImageToBitmapRGBA8(uiImage);
     texture.Generate(width, height, image);
-   // SOIL_free_image_data(image);
+    free(image);
     return texture;
 }
+
