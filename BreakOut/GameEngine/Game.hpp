@@ -18,6 +18,9 @@
 #include "GameObject.hpp"
 #include "GameLevel.hpp"
 
+
+extern GLuint framebuffer;
+
 // Represents the current state of the game
 enum GameState {
     GAME_ACTIVE,
@@ -65,7 +68,7 @@ public:
     // GameLoop
     void ProcessInput(GLfloat dt);
     void Update(GLfloat dt);
-    void Render();
+    void Render(GLfloat dt);
     void DoCollisions();
     // Reset
     void ResetLevel();

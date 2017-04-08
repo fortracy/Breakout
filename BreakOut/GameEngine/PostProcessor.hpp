@@ -20,7 +20,7 @@ public:
     // State
     Shader PostProcessingShader;
     Texture2D Texture;
-    GLuint Width, Height;
+    GLint Width, Height;
     // Options
     GLboolean Confuse, Chaos, Shake;
     // Constructor
@@ -36,6 +36,10 @@ private:
     GLuint MSFBO, FBO; // MSFBO = Multisampled FBO. FBO is regular, used for blitting MS color-buffer to texture
     GLuint RBO; // RBO is used for multisampled color buffer
     GLuint VAO;
+    
+    GLuint _targetFramebuffer,_massFrameramebuffer,_massColorRenderbuffer;
+    
+    GLuint _massTextureId;
     // Initialize quad for rendering postprocessing texture
     void initRenderData();
 };

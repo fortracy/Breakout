@@ -46,7 +46,8 @@ void Game::Init()
     ResourceManager::LoadShader("particle.vs", "particle.frag", nullptr, "particle");
     ResourceManager::LoadShader("postProcess.vs", "postProcess.frag", nullptr, "postprocessing");
     // Configure shaders
-    GLKMatrix4 projection = GLKMatrix4MakeOrtho(0.0f, static_cast<GLfloat>(this->Width), static_cast<GLfloat>(this->Height), 0.0f, -1.0f, 1.0f);
+    //投影矩阵要设置好，否则会影响渲染;
+    GLKMatrix4 projection = GLKMatrix4MakeOrtho(0.0f, static_cast<GLfloat>(this->Width), static_cast<GLfloat>(this->Height),0.0f, -1.0f, 1.0f);
     
     
     
@@ -93,24 +94,24 @@ void Game::Update(GLfloat dt)
     // Update objects
     Ball->Move(dt, this->Width);
     // Check for collisions
-    this->DoCollisions();
+  //  this->DoCollisions();
     // Update particles
-    Particles->Update(dt, *Ball, 2,{Ball->Radius / 2,Ball->Radius / 2});
+  //  Particles->Update(dt, *Ball, 2,{Ball->Radius / 2,Ball->Radius / 2});
     // Update PowerUps
    // this->UpdatePowerUps(dt);
     // Reduce shake time
-    if (ShakeTime > 0.0f)
-    {
-        ShakeTime -= dt;
-        if (ShakeTime <= 0.0f)
-            Effects->Shake = GL_FALSE;
-    }
+  //  if (ShakeTime > 0.0f)
+  //  {
+  //      ShakeTime -= dt;
+  //      if (ShakeTime <= 0.0f)
+  //          Effects->Shake = GL_FALSE;
+  //  }
     // Check loss condition
-    if (Ball->Position.y >= this->Height) // Did ball reach bottom edge?
-    {
-        this->ResetLevel();
-        this->ResetPlayer();
-    }
+  //  if (Ball->Position.y >= this->Height) // Did ball reach bottom edge?
+  //  {
+  //      this->ResetLevel();
+  //      this->ResetPlayer();
+  //  }
 }
 
 
@@ -143,31 +144,33 @@ void Game::ProcessInput(GLfloat dt)
   //  }
 }
 
-void Game::Render()
+void Game::Render(GLfloat dt)
 {
     if (this->State == GAME_ACTIVE)
     {
+        glViewport(0, 0, this->Width, this->Height);
         // Begin rendering to postprocessing quad
         Effects->BeginRender();
         // Draw background
-        Renderer->DrawSprite(ResourceManager::GetTexture("background"), {0, 0}, {static_cast<float>(this->Width), static_cast<float>(this->Height)}, 0.0f);
+   //     Renderer->DrawSprite(ResourceManager::GetTexture("background"), {0, 0}, {static_cast<float>(this->Width), static_cast<float>(this->Height)}, 0.0f);
         // Draw level
-        this->Levels[this->Level].draw(*Renderer);
+   //     this->Levels[this->Level].draw(*Renderer);
         // Draw player
-        Player->Draw(*Renderer);
+       Player->Draw(*Renderer);
         // Draw PowerUps
 //        for (PowerUp &powerUp : this->PowerUps)
   //          if (!powerUp.Destroyed)
     //            powerUp.Draw(*Renderer);
         // Draw particles
-        Particles->Draw();
+      //  Particles->Draw();
         // Draw ball
         Ball->Draw(*Renderer);
         // End rendering to postprocessing quad
-        Effects->EndRender();
+       Effects->EndRender();
+        
+        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
         // Render postprocessing quad
-        GLfloat time = 0.0;
-        Effects->Render(time);
+        Effects->Render(dt);
     }
 }
 

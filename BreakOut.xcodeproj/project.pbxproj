@@ -29,10 +29,10 @@
 		6B5236A71E890D600049832C /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5236A61E890D600049832C /* GLKit.framework */; };
 		6B9483B51E83C5C200DB26F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9483B41E83C5C200DB26F0 /* main.m */; };
 		6B9483B81E83C5C200DB26F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9483B71E83C5C200DB26F0 /* AppDelegate.m */; };
-		6B9483BB1E83C5C200DB26F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9483BA1E83C5C200DB26F0 /* ViewController.m */; };
-		6B9483BE1E83C5C200DB26F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9483BC1E83C5C200DB26F0 /* Main.storyboard */; };
 		6B9483C01E83C5C200DB26F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9483BF1E83C5C200DB26F0 /* Assets.xcassets */; };
 		6B9483C31E83C5C200DB26F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9483C11E83C5C200DB26F0 /* LaunchScreen.storyboard */; };
+		6BAB62281E96479C00111E89 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6BAB62271E96479C00111E89 /* GLView.mm */; };
+		6BAB622A1E9647DE00111E89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BAB62291E9647DE00111E89 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,12 +78,12 @@
 		6B9483B41E83C5C200DB26F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B9483B61E83C5C200DB26F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6B9483B71E83C5C200DB26F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6B9483B91E83C5C200DB26F0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6B9483BA1E83C5C200DB26F0 /* ViewController.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = ViewController.m; sourceTree = "<group>"; };
-		6B9483BD1E83C5C200DB26F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B9483BF1E83C5C200DB26F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B9483C21E83C5C200DB26F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B9483C41E83C5C200DB26F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BAB62261E96479C00111E89 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
+		6BAB62271E96479C00111E89 /* GLView.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GLView.mm; sourceTree = "<group>"; };
+		6BAB62291E9647DE00111E89 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,14 +189,14 @@
 				6B5369311E8617EF00A2622E /* GLKitCPP */,
 				6B9483B61E83C5C200DB26F0 /* AppDelegate.h */,
 				6B9483B71E83C5C200DB26F0 /* AppDelegate.m */,
-				6B9483B91E83C5C200DB26F0 /* ViewController.h */,
-				6B9483BA1E83C5C200DB26F0 /* ViewController.m */,
-				6B9483BC1E83C5C200DB26F0 /* Main.storyboard */,
 				6B9483BF1E83C5C200DB26F0 /* Assets.xcassets */,
 				6B9483C11E83C5C200DB26F0 /* LaunchScreen.storyboard */,
 				6B9483C41E83C5C200DB26F0 /* Info.plist */,
 				6B9483B31E83C5C200DB26F0 /* Supporting Files */,
 				6B2BD8F91E84FDEB00081BBF /* shaders */,
+				6BAB62261E96479C00111E89 /* GLView.h */,
+				6BAB62271E96479C00111E89 /* GLView.mm */,
+				6BAB62291E9647DE00111E89 /* Main.storyboard */,
 			);
 			path = BreakOut;
 			sourceTree = "<group>";
@@ -272,10 +272,10 @@
 				6B2BD8FE1E84FE7700081BBF /* sprite.frag in Resources */,
 				6B2BD9031E85145E00081BBF /* postProcess.vs in Resources */,
 				6B9483C31E83C5C200DB26F0 /* LaunchScreen.storyboard in Resources */,
+				6BAB622A1E9647DE00111E89 /* Main.storyboard in Resources */,
 				6B2BD9001E84FE7700081BBF /* textRender.frag in Resources */,
 				6B2BD9051E85147C00081BBF /* postProcess.frag in Resources */,
 				6B9483C01E83C5C200DB26F0 /* Assets.xcassets in Resources */,
-				6B9483BE1E83C5C200DB26F0 /* Main.storyboard in Resources */,
 				6B52367E1E88EA0F0049832C /* particle.frag in Resources */,
 				6B2BD8FF1E84FE7700081BBF /* sprite.vs in Resources */,
 			);
@@ -291,7 +291,6 @@
 				6B5236A01E88F08A0049832C /* TextRender.cpp in Sources */,
 				6B5236991E88F08A0049832C /* GameLevel.cpp in Sources */,
 				6B52369B1E88F08A0049832C /* ParticleGenerator.cpp in Sources */,
-				6B9483BB1E83C5C200DB26F0 /* ViewController.m in Sources */,
 				6B5236971E88F08A0049832C /* BallObject.cpp in Sources */,
 				6B9483B81E83C5C200DB26F0 /* AppDelegate.m in Sources */,
 				6B52369D1E88F08A0049832C /* ResourceManager.cpp in Sources */,
@@ -302,20 +301,13 @@
 				6B52369C1E88F08A0049832C /* PostProcessor.cpp in Sources */,
 				6B5236981E88F08A0049832C /* Game.cpp in Sources */,
 				6B52369A1E88F08A0049832C /* GameObject.cpp in Sources */,
+				6BAB62281E96479C00111E89 /* GLView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6B9483BC1E83C5C200DB26F0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6B9483BD1E83C5C200DB26F0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6B9483C11E83C5C200DB26F0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
