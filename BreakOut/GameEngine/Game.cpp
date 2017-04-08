@@ -46,7 +46,7 @@ void Game::Init()
     ResourceManager::LoadShader("particle.vs", "particle.frag", nullptr, "particle");
     ResourceManager::LoadShader("postProcess.vs", "postProcess.frag", nullptr, "postprocessing");
     // Configure shaders
-    //投影矩阵要设置好，否则会影响渲染;
+    //MARK:投影矩阵要设置好，否则会影响渲染;
     GLKMatrix4 projection = GLKMatrix4MakeOrtho(0.0f, static_cast<GLfloat>(this->Width), static_cast<GLfloat>(this->Height),0.0f, -1.0f, 1.0f);
     
     

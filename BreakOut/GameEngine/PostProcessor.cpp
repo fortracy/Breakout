@@ -24,56 +24,23 @@ PostProcessor::PostProcessor(Shader shader, GLuint width, GLuint height)
         glBindRenderbuffer(GL_RENDERBUFFER, this->RBO);
         glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA8, this->Width, this->Height);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, this->RBO);
-        glBindRenderbuffer(GL_RENDERBUFFER, 0);
         
         if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
             std::cout << "ERROR::POSTPROCESSOR: Failed to initialize MSFBO" << std::endl;
+        glBindRenderbuffer(GL_RENDERBUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
-    
-//    {
-//        glGenFramebuffers(1, &this->FBO);
-//        glBindFramebuffer(GL_FRAMEBUFFER, this->FBO);
-//        
-//        //        glGenRenderbuffers(1, &_targetDepthRenderbuffer);
-//        //        glBindRenderbuffer(GL_RENDERBUFFER, _targetDepthRenderbuffer);
-//        //        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, viewWidth, viewHeight);
-//        //        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _targetDepthRenderbuffer);
-//        //        glBindRenderbuffer(GL_RENDERBUFFER, 0);
-//        //        GetGLError();
-//        
-//        //将_massTextureId绑定到_targetFramebuffer的renderbuffer上
-//        glGenTextures(1, &_massTextureId);
-//        glBindTexture(GL_TEXTURE_2D, _massTextureId);
-//        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-//        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->Width,this->Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-//        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _massTextureId, 0);
-//        glBindTexture(GL_TEXTURE_2D, 0);
-//    }
-    
-    
+    {
+        glGenFramebuffers(1, &this->FBO);
+        glBindFramebuffer(GL_FRAMEBUFFER, this->FBO);
+        this->Texture.Generate(width, height, NULL);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->Texture.ID, 0); // Attach texture to framebuffer as its color attachment
 
-
-    
-    glGenFramebuffers(1, &this->FBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, this->FBO);
-    this->Texture.Generate(width, height, NULL);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->Texture.ID, 0); // Attach texture to framebuffer as its color attachment
-    error = glGetError();
-
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        std::cout << "ERROR::POSTPROCESSOR: Failed to initialize FBO" << std::endl;
-    glBindRenderbuffer(GL_RENDERBUFFER, 0);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-    
-    
-    
-
-    
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+            std::cout << "ERROR::POSTPROCESSOR: Failed to initialize FBO" << std::endl;
+        glBindRenderbuffer(GL_RENDERBUFFER, 0);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
     // Initialize render data and uniforms
     this->initRenderData();
 
@@ -109,12 +76,6 @@ PostProcessor::PostProcessor(Shader shader, GLuint width, GLuint height)
     
     glUniform1fv(glGetUniformLocation(this->PostProcessingShader.ID, "blur_kernel"), 9, blur_kernel);
     
-
-    
-
-    
-    
-    
 }
 
 void PostProcessor::BeginRender()
@@ -134,11 +95,7 @@ void PostProcessor::EndRender()
     GLenum error;
     // Now resolve multisampled color-buffer into intermediate FBO to store to texture
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->MSFBO);
-    error = glGetError();
-
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->FBO);
-    error = glGetError();
-
     glBlitFramebuffer(0, 0, this->Width, this->Height, 0, 0, this->Width, this->Height, GL_COLOR_BUFFER_BIT, GL_LINEAR);
     
     error = glGetError();

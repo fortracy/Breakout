@@ -146,8 +146,7 @@
     glGenRenderbuffers(1, &colorRenderBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderBuffer);
     [glcontext renderbufferStorage:GL_RENDERBUFFER fromDrawable:eaglLayer];
-//    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);
-//    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &backingHeight);
+
 }
 
 - (void) setupFrameBuffer
@@ -183,9 +182,6 @@
 - (void) _display:(CADisplayLink *)displayLink
 {
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-    glClearColor(1.0, 0.3, 0.5, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-
 
     breakout->Render(displayLink.duration);
     
