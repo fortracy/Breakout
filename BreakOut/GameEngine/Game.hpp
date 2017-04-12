@@ -73,6 +73,9 @@ public:
     // Reset
     void ResetLevel();
     void ResetPlayer();
+    
+    void shoot();
+    void move();
     // Powerups
   //  void SpawnPowerUps(GameObject &block);
   //  void UpdatePowerUps(GLfloat dt);

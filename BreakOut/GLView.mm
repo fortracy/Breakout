@@ -65,12 +65,7 @@
 - (instancetype) initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self setupLayer];
-        [self setupContext];
-        [self setupRenderBuffer];
-        [self setupFrameBuffer];
-        [self setupGame];
-        [self setupDisplayLink];
+        [self setup];
     }
     
     return self;
@@ -79,12 +74,7 @@
 - (instancetype) initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self setupLayer];
-        [self setupContext];
-        [self setupRenderBuffer];
-        [self setupFrameBuffer];
-        [self setupGame];
-        [self setupDisplayLink];
+        [self setup];
     }
     
     return self;
@@ -113,6 +103,17 @@
 
 
 #pragma mark - setup
+
+- (void) setup
+{
+    [self setupLayer];
+    [self setupContext];
+    [self setupRenderBuffer];
+    [self setupFrameBuffer];
+    [self setupGame];
+    [self setupGestureRecognizer];
+    [self setupDisplayLink];
+}
 
 + (Class) layerClass
 {
@@ -203,12 +204,15 @@
 
 - (void) pan:(UIPanGestureRecognizer *)pgr
 {
-    
+    CGPoint translate = [pgr translationInView:self];
+    NSLog(@"translate x is %f, y is %f  %s",translate.x,translate.y,__FUNCTION__);
 }
 
 - (void) tap:(UITapGestureRecognizer *)tgr
 {
-    
+    CGPoint location = [tgr locationInView:self];
+    NSLog(@"location x is %f, y is %f  %s",location.x,location.y,__FUNCTION__);
+    breakout->shoot();
 }
 
 

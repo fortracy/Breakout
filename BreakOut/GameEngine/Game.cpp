@@ -114,6 +114,19 @@ void Game::Update(GLfloat dt)
   //  }
 }
 
+void Game::shoot()
+{
+    if (this->State == GAME_ACTIVE) {
+        Ball->Stuck = GL_FALSE;
+    }
+}
+
+void Game::move()
+{
+    
+}
+
+
 
 void Game::ProcessInput(GLfloat dt)
 {
