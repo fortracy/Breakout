@@ -157,12 +157,23 @@
                               GL_RENDERBUFFER, colorRenderBuffer);
 }
 
+- (void) setupGestureRecognizer
+{
+    UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    
+    [self addGestureRecognizer:pgr];
+    [self addGestureRecognizer:tgr];
+}
+
 
 - (void) setupDisplayLink
 {
     displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(display:)];
     [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
+
+
 
 #pragma mark - refresh
 
@@ -185,6 +196,18 @@
     breakout->Render(displayLink.duration);
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderBuffer);
     [glcontext presentRenderbuffer:GL_RENDERBUFFER];
+    
+}
+
+#pragma mark - gr
+
+- (void) pan:(UIPanGestureRecognizer *)pgr
+{
+    
+}
+
+- (void) tap:(UITapGestureRecognizer *)tgr
+{
     
 }
 
