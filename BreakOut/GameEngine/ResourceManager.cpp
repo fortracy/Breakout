@@ -209,7 +209,8 @@ CGContextRef newBitmapRGBA8ContextFromImage(CGImageRef image) {
                                     bitsPerComponent,
                                     bytesPerRow,
                                     colorSpace,
-                                    kCGImageAlphaPremultipliedLast);    // RGBA
+                                    kCGImageAlphaPremultipliedLast);
+    // RGBA
     if(!context) {
         free(bitmapData);
         NSLog(@"Bitmap context not created");
@@ -230,7 +231,7 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
         texture.Internal_Format = GL_RGBA;
         texture.Image_Format = GL_RGBA;
     }
-    int width, height;
+    size_t width, height;
     unsigned char*image;
     UIImage *uiImage = [UIImage imageNamed:[NSString stringWithUTF8String:file]];
     width = CGImageGetWidth(uiImage.CGImage);

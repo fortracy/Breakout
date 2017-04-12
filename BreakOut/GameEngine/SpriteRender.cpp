@@ -30,9 +30,11 @@ void SpriteRenderer::DrawSprite(const Texture2D &texture, GLKVector2 position, G
     
     GLKMatrix4 model = GLKMatrix4Identity;
     model = GLKMatrix4Translate(model, position.x, position.y, 0.0);
-    model = GLKMatrix4Translate(model, 0.5f*size.x, 0.5f*size.y, 0.0f);
+    //注释掉这两句先
+ //   model = GLKMatrix4Translate(model, 0.5f*size.x, 0.5f*size.y, 0.0f);
     model = GLKMatrix4Rotate(model, rotate, 0.0f, 0.0f, 1.0f);
-    model = GLKMatrix4Translate(model, -0.5f*size.x, -0.5f*size.y, 0.0f);
+    //注释掉这两句先
+  //  model = GLKMatrix4Translate(model, -0.5f*size.x, -0.5f*size.y, 0.0f);
     model = GLKMatrix4Scale(model, size.x, size.y, 1.0f);
 
     
@@ -45,7 +47,6 @@ void SpriteRenderer::DrawSprite(const Texture2D &texture, GLKVector2 position, G
     texture.Bind();
     
     glBindVertexArray(this->quadVAO);
-    //glDrawElements(GL_TRIANGLE_STRIP, 6, GL_UNSIGNED_BYTE, 0);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glBindVertexArray(0);
@@ -69,7 +70,7 @@ static GLfloat vertices[] = {
 void SpriteRenderer::initRenderData()
 {
     GLuint VBO;
-     glGenVertexArrays(1, &this->quadVAO);
+    glGenVertexArrays(1, &this->quadVAO);
     glBindVertexArray(this->quadVAO);
 
     glGenBuffers(1, &VBO);

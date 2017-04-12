@@ -73,10 +73,10 @@ void Game::Init()
     Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
     Effects = new PostProcessor(ResourceManager::GetShader("postprocessing"), this->Width, this->Height);
     // Load levels
-    GameLevel one; one.Load("levels/one.lvl", this->Width, this->Height * 0.5);
-    GameLevel two; two.Load("levels/two.lvl", this->Width, this->Height * 0.5);
-    GameLevel three; three.Load("levels/three.lvl", this->Width, this->Height * 0.5);
-    GameLevel four; four.Load("levels/four.lvl", this->Width, this->Height * 0.5);
+    GameLevel one; one.Load("one.lvl", this->Width, this->Height * 0.5);
+    GameLevel two; two.Load("two.lvl", this->Width, this->Height * 0.5);
+    GameLevel three; three.Load("three.lvl", this->Width, this->Height * 0.5);
+    GameLevel four; four.Load("four.lvl", this->Width, this->Height * 0.5);
     this->Levels.push_back(one);
     this->Levels.push_back(two);
     this->Levels.push_back(three);
@@ -96,7 +96,7 @@ void Game::Update(GLfloat dt)
     // Check for collisions
   //  this->DoCollisions();
     // Update particles
-  //  Particles->Update(dt, *Ball, 2,{Ball->Radius / 2,Ball->Radius / 2});
+    Particles->Update(dt, *Ball, 2,{Ball->Radius / 2,Ball->Radius / 2});
     // Update PowerUps
    // this->UpdatePowerUps(dt);
     // Reduce shake time
@@ -152,9 +152,9 @@ void Game::Render(GLfloat dt)
         // Begin rendering to postprocessing quad
         Effects->BeginRender();
         // Draw background
-   //     Renderer->DrawSprite(ResourceManager::GetTexture("background"), {0, 0}, {static_cast<float>(this->Width), static_cast<float>(this->Height)}, 0.0f);
+        Renderer->DrawSprite(ResourceManager::GetTexture("background"), {0, 0}, {static_cast<float>(this->Width), static_cast<float>(this->Height)}, 0.0f);
         // Draw level
-   //     this->Levels[this->Level].draw(*Renderer);
+        this->Levels[this->Level].draw(*Renderer);
         // Draw player
        Player->Draw(*Renderer);
         // Draw PowerUps
@@ -162,7 +162,7 @@ void Game::Render(GLfloat dt)
   //          if (!powerUp.Destroyed)
     //            powerUp.Draw(*Renderer);
         // Draw particles
-      //  Particles->Draw();
+        Particles->Draw();
         // Draw ball
         Ball->Draw(*Renderer);
         // End rendering to postprocessing quad

@@ -25,7 +25,7 @@ public:
     // Destructor
     ~SpriteRenderer();
     // Renders a defined quad textured with given sprite
-    void DrawSprite(const Texture2D &texture, GLKVector2 position, GLKVector2 size = {10.0, 10.0}, GLfloat rotate = 0.0f, GLKVector3 color = {1.0f, 0.0f, 0.0f});
+    void DrawSprite(const Texture2D &texture, GLKVector2 position, GLKVector2 size = {10.0, 10.0}, GLfloat rotate = 0.0f, GLKVector3 color = {1.0f, 1.0f, 1.0f});
 private:
     // Render state
     Shader shader;

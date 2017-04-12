@@ -182,12 +182,8 @@
 - (void) _display:(CADisplayLink *)displayLink
 {
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-
     breakout->Render(displayLink.duration);
-    
-    
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderBuffer);
-    
     [glcontext presentRenderbuffer:GL_RENDERBUFFER];
     
 }

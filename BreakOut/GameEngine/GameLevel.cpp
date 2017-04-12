@@ -13,6 +13,22 @@
 #include "ResourceManager.hpp"
 
 
+
+static const GLchar * fullPath(const GLchar *filename)
+{
+    const GLchar *fullPath = nullptr;
+    if (filename) {
+        NSString *fileName = [NSString stringWithUTF8String:filename];
+        NSString *FullPath = [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
+        fullPath = FullPath.UTF8String;
+    }
+    
+    return fullPath;
+    
+}
+
+
+
 void GameLevel::Load(const GLchar *file, GLuint levelWidth, GLuint levelHeight)
 {
     // Clear old data
@@ -21,7 +37,10 @@ void GameLevel::Load(const GLchar *file, GLuint levelWidth, GLuint levelHeight)
     GLuint tileCode;
     GameLevel level;
     std::string line;
-    std::ifstream fstream(file);
+    
+    const GLchar * filePath = fullPath(file);
+
+    std::ifstream fstream(filePath);
     std::vector<std::vector<GLuint>> tileData;
     if (fstream)
     {
@@ -36,7 +55,10 @@ void GameLevel::Load(const GLchar *file, GLuint levelWidth, GLuint levelHeight)
         if (tileData.size() > 0)
             this->init(tileData, levelWidth, levelHeight);
     }
+    
 }
+
+
 
 void GameLevel::draw(SpriteRenderer &renderer)
 {
