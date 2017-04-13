@@ -40,10 +40,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6B1BEC421E9C790300D93A0C /* one.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = one.lvl; sourceTree = "<group>"; };
-		6B1BEC441E9C794A00D93A0C /* two.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = two.lvl; sourceTree = "<group>"; };
-		6B1BEC461E9C795800D93A0C /* three.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = three.lvl; sourceTree = "<group>"; };
-		6B1BEC481E9C797100D93A0C /* four.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = four.lvl; sourceTree = "<group>"; };
+		6B1BEC421E9C790300D93A0C /* one.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = one.lvl; path = ../one.lvl; sourceTree = "<group>"; };
+		6B1BEC441E9C794A00D93A0C /* two.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = two.lvl; path = ../two.lvl; sourceTree = "<group>"; };
+		6B1BEC461E9C795800D93A0C /* three.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = three.lvl; path = ../three.lvl; sourceTree = "<group>"; };
+		6B1BEC481E9C797100D93A0C /* four.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = four.lvl; path = ../four.lvl; sourceTree = "<group>"; };
 		6B2BD8FA1E84FE7700081BBF /* sprite.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sprite.frag; sourceTree = "<group>"; };
 		6B2BD8FB1E84FE7700081BBF /* sprite.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sprite.vs; sourceTree = "<group>"; };
 		6B2BD8FC1E84FE7700081BBF /* textRender.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = textRender.frag; sourceTree = "<group>"; };
@@ -106,6 +106,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B26C71D1E9F5A490081F3FA /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				6B1BEC421E9C790300D93A0C /* one.lvl */,
+				6B1BEC441E9C794A00D93A0C /* two.lvl */,
+				6B1BEC461E9C795800D93A0C /* three.lvl */,
+				6B1BEC481E9C797100D93A0C /* four.lvl */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
 		6B2BD8F91E84FDEB00081BBF /* shaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,10 +216,7 @@
 				6BAB62261E96479C00111E89 /* GLView.h */,
 				6BAB62271E96479C00111E89 /* GLView.mm */,
 				6BAB62291E9647DE00111E89 /* Main.storyboard */,
-				6B1BEC421E9C790300D93A0C /* one.lvl */,
-				6B1BEC441E9C794A00D93A0C /* two.lvl */,
-				6B1BEC461E9C795800D93A0C /* three.lvl */,
-				6B1BEC481E9C797100D93A0C /* four.lvl */,
+				6B26C71D1E9F5A490081F3FA /* resource */,
 			);
 			path = BreakOut;
 			sourceTree = "<group>";
