@@ -15,6 +15,7 @@
 #include "BallObject.hpp"
 #include "PostProcessor.hpp"
 #include "GLKVector2_cpp.h"
+#include <simd/common.h>
 
 // Game-related State data
 SpriteRenderer    *Renderer;
@@ -94,7 +95,7 @@ void Game::Update(GLfloat dt)
     // Update objects
     Ball->Move(dt, this->Width);
     // Check for collisions
-  //  this->DoCollisions();
+    this->DoCollisions();
     // Update particles
     Particles->Update(dt, *Ball, 2,{Ball->Radius / 2,Ball->Radius / 2});
     // Update PowerUps
@@ -107,11 +108,11 @@ void Game::Update(GLfloat dt)
   //          Effects->Shake = GL_FALSE;
   //  }
     // Check loss condition
-  //  if (Ball->Position.y >= this->Height) // Did ball reach bottom edge?
-  //  {
-  //      this->ResetLevel();
-  //      this->ResetPlayer();
-  //  }
+    if (Ball->Position.y >= this->Height) // Did ball reach bottom edge?
+    {
+        this->ResetLevel();
+        this->ResetPlayer();
+    }
 }
 
 void Game::shoot()
@@ -121,9 +122,28 @@ void Game::shoot()
     }
 }
 
-void Game::move()
+void Game::move(bool left)
 {
-    
+    if (this->State == GAME_ACTIVE) {
+        GLfloat velocity = PLAYER_VELOCITY * 0.01;
+        
+        
+        if (left) {
+            if (Player->Position.x >= 0)
+            {
+                Player->Position.x -= velocity;
+                if (Ball->Stuck)
+                    Ball->Position.x -= velocity;
+            }
+        }else{
+            if (Player->Position.x <= this->Width - Player->Size.x)
+            {
+                Player->Position.x += velocity;
+                if (Ball->Stuck)
+                    Ball->Position.x += velocity;
+            }
+        }
+    }
 }
 
 
@@ -190,13 +210,13 @@ void Game::Render(GLfloat dt)
 
 void Game::ResetLevel()
 {
-    if (this->Level == 0)this->Levels[0].Load("levels/one.lvl", this->Width, this->Height * 0.5f);
+    if (this->Level == 0)this->Levels[0].Load("one.lvl", this->Width, this->Height * 0.5f);
     else if (this->Level == 1)
-        this->Levels[1].Load("levels/two.lvl", this->Width, this->Height * 0.5f);
+        this->Levels[1].Load("two.lvl", this->Width, this->Height * 0.5f);
     else if (this->Level == 2)
-        this->Levels[2].Load("levels/three.lvl", this->Width, this->Height * 0.5f);
+        this->Levels[2].Load("three.lvl", this->Width, this->Height * 0.5f);
     else if (this->Level == 3)
-        this->Levels[3].Load("levels/four.lvl", this->Width, this->Height * 0.5f);
+        this->Levels[3].Load("four.lvl", this->Width, this->Height * 0.5f);
 }
 
 void Game::ResetPlayer()
@@ -431,7 +451,7 @@ void Game::DoCollisions()
         Ball->Velocity.y = -1 * std::abs(Ball->Velocity.y);
         
         // If Sticky powerup is activated, also stick ball to paddle once new velocity vectors were calculated
-        Ball->Stuck = Ball->Sticky;
+     //   Ball->Stuck = Ball->Sticky;
     }
 }
 
@@ -447,6 +467,31 @@ GLboolean CheckCollision(GameObject &one, GameObject &two) // AABB - AABB collis
     return collisionX && collisionY;
 }
 
+int clamp(int value, int min, int max)
+{
+    if (value < min)
+    {
+        return min;
+    }
+    else if (value > max)
+    {
+        return max;
+    }
+    
+    return value;
+}
+
+
+GLKVector2 clamp(GLKVector2 v, const GLKVector2 min, const GLKVector2 max)
+{
+    GLKVector2 clampVector;
+    clampVector.x = clamp(v.x, min.x, max.x);
+    clampVector.y = clamp(v.y, min.y, max.y);
+    
+    return clampVector;
+}
+
+
 Collision CheckCollision(BallObject &one, GameObject &two) // AABB - Circle collision
 {
     // Get center point circle first
@@ -458,12 +503,13 @@ Collision CheckCollision(BallObject &one, GameObject &two) // AABB - Circle coll
     GLKVector2 difference = center - aabb_center;
     
     GLKVector2 clamped;
-  //  GLKVector2 clamped = glm::clamp(difference, -aabb_half_extents, aabb_half_extents);
+    clamped = clamp(difference, -aabb_half_extents, aabb_half_extents);
+//    clamped = difference;
+    //GLKVector2 clamped = glm::clamp(difference, -aabb_half_extents, aabb_half_extents);
     // Now that we know the the clamped values, add this to AABB_center and we get the value of box closest to circle
     GLKVector2 closest = aabb_center + clamped;
     // Now retrieve vector between center circle and closest point AABB and check if length < radius
     difference = closest - center;
-    
     
    
     if ( GLKVector2Length(difference) < one.Radius) // not <= since in that case a collision also occurs when object one exactly touches object two, which they are at the end of each collision resolution stage.
@@ -471,6 +517,9 @@ Collision CheckCollision(BallObject &one, GameObject &two) // AABB - Circle coll
     else
         return std::make_tuple(GL_FALSE, UP,GLKVector2Make(0.0, 0.0));
 }
+
+
+
 
 // Calculates which direction a vector is facing (N,E,S or W)
 Direction VectorDirection(GLKVector2 target)

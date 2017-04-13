@@ -193,6 +193,7 @@
 
 - (void) _display:(CADisplayLink *)displayLink
 {
+    glClear(GL_COLOR_BUFFER_BIT);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     breakout->Render(displayLink.duration);
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderBuffer);
@@ -206,6 +207,26 @@
 {
     CGPoint translate = [pgr translationInView:self];
     NSLog(@"translate x is %f, y is %f  %s",translate.x,translate.y,__FUNCTION__);
+    static CGFloat lastX = 0.0;
+    BOOL left,right;
+    if (translate.x - lastX>=0) {
+        left = YES;
+    }else{
+        left = NO;
+    }
+    
+    
+    breakout->move(left);
+    
+    
+    
+    
+    
+    
+     lastX = translate.x;
+    
+    
+    
 }
 
 - (void) tap:(UITapGestureRecognizer *)tgr
