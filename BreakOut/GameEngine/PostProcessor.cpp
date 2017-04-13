@@ -80,15 +80,7 @@ PostProcessor::PostProcessor(Shader shader, GLuint width, GLuint height)
 
 void PostProcessor::BeginRender()
 {
-    GLenum error;
     glBindFramebuffer(GL_FRAMEBUFFER, this->MSFBO);
-//    error = glGetError();
-//    glViewport(0, 0, this->Width, this->Height);
-//
-//    glClearColor(0.5f, 1.0f, 0.5f, 1.0f);
-//    error = glGetError();
-//
-//    glClear(GL_COLOR_BUFFER_BIT);
 }
 void PostProcessor::EndRender()
 {

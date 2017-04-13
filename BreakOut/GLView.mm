@@ -13,27 +13,6 @@
 #include "GameEngine/Game.hpp"
 //#include "Game.hpp"
 
-
-//typedef struct {
-//    float Position[3];
-//    float Color[4];
-//    float TexCoord[2];
-//}Vertex;
-//
-//static const Vertex Vertices[] = {
-//    {{1.0, 0.0, 0.0}, {1, 1, 1, 1}, {1, 1}},
-//    {{1.0, 1.0, 0.0}, {1, 1, 1, 1}, {1, 0}},
-//    {{0.0, 1.0, 0.0}, {1, 1, 1, 1}, {0, 0}},
-//    {{0.0, 0.0, 0.0}, {1, 1,1, 1}, {0, 1}},
-//};
-//
-//static const GLubyte Indices[] = {
-//    1, 0, 2, 3
-//};
-
-
-
-
 @interface GLView ()
 {
     CAEAGLLayer *eaglLayer;

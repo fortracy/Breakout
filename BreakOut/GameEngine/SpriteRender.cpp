@@ -30,13 +30,10 @@ void SpriteRenderer::DrawSprite(const Texture2D &texture, GLKVector2 position, G
     
     GLKMatrix4 model = GLKMatrix4Identity;
     model = GLKMatrix4Translate(model, position.x, position.y, 0.0);
-    //注释掉这两句先
- //   model = GLKMatrix4Translate(model, 0.5f*size.x, 0.5f*size.y, 0.0f);
+    model = GLKMatrix4Translate(model, 0.5f*size.x, 0.5f*size.y, 0.0f);
     model = GLKMatrix4Rotate(model, rotate, 0.0f, 0.0f, 1.0f);
-    //注释掉这两句先
-  //  model = GLKMatrix4Translate(model, -0.5f*size.x, -0.5f*size.y, 0.0f);
+    model = GLKMatrix4Translate(model, -0.5f*size.x, -0.5f*size.y, 0.0f);
     model = GLKMatrix4Scale(model, size.x, size.y, 1.0f);
-
     
     this->shader.SetMatrix4("model", model);
     

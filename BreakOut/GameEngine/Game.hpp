@@ -66,7 +66,6 @@ public:
     // Initialize game state (load all shaders/textures/levels)
     void Init();
     // GameLoop
-    void ProcessInput(GLfloat dt);
     void Update(GLfloat dt);
     void Render(GLfloat dt);
     void DoCollisions();
@@ -77,8 +76,6 @@ public:
     void shoot();
     void move(bool left);
     // Powerups
-  //  void SpawnPowerUps(GameObject &block);
-  //  void UpdatePowerUps(GLfloat dt);
 };
 
 
