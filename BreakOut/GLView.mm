@@ -114,8 +114,8 @@
 
 - (void) setupGame
 {
-    CGFloat width =  CGRectGetWidth([UIScreen mainScreen].bounds) ;
-    CGFloat height = CGRectGetHeight([UIScreen mainScreen].bounds);
+    CGFloat width =  CGRectGetWidth(self.bounds) ;
+    CGFloat height = CGRectGetHeight(self.bounds);
     
     breakout = new Game(width,height);
     
