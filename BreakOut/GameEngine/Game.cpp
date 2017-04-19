@@ -66,6 +66,8 @@ void Game::Init()
     Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
     Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
     Effects = new PostProcessor(ResourceManager::GetShader("postprocessing"), this->Width, this->Height);
+    Effects->Chaos = GL_TRUE;
+
     // Load levels
     GameLevel one; one.Load("one.lvl", this->Width, this->Height * 0.5);
     GameLevel two; two.Load("two.lvl", this->Width, this->Height * 0.5);
@@ -99,6 +101,17 @@ void Game::Update(GLfloat dt)
             Effects->Shake = GL_FALSE;
     }
     // Check loss condition
+    if(this->Levels[this->Level].isCompleted())
+    {
+        if (this->Level<this->Levels.size()) {
+            this->Level++;
+        }else{
+            this->Level = 0;
+        }
+        this->ResetPlayer();
+        this->ResetLevel();
+    }
+    
     if (Ball->Position.y >= this->Height) // Did ball reach bottom edge?
     {
         this->ResetLevel();
@@ -167,12 +180,18 @@ void Game::Render(GLfloat dt)
 void Game::ResetLevel()
 {
     if (this->Level == 0)this->Levels[0].Load("one.lvl", this->Width, this->Height * 0.5f);
-    else if (this->Level == 1)
+    else if (this->Level == 1){
         this->Levels[1].Load("two.lvl", this->Width, this->Height * 0.5f);
-    else if (this->Level == 2)
+        Effects->Chaos = GL_TRUE;
+    }
+    else if (this->Level == 2){
         this->Levels[2].Load("three.lvl", this->Width, this->Height * 0.5f);
-    else if (this->Level == 3)
+        Effects->Chaos = GL_TRUE;
+    }
+    else if (this->Level == 3){
         this->Levels[3].Load("four.lvl", this->Width, this->Height * 0.5f);
+        Effects->Confuse = GL_TRUE;
+    }
 }
 
 void Game::ResetPlayer()

@@ -20,8 +20,6 @@
     
     CADisplayLink *displayLink;
     
-    
-  
     //buffer
     GLuint VBO;
     GLuint IBO;
@@ -184,6 +182,7 @@
 
 - (void) pan:(UIPanGestureRecognizer *)pgr
 {
+    //TODO:优化
     CGPoint translate = [pgr translationInView:self];
     NSLog(@"translate x is %f, y is %f  %s",translate.x,translate.y,__FUNCTION__);
     static CGFloat lastX = 0.0;
@@ -193,16 +192,10 @@
     }else{
         left = NO;
     }
-    
-    
+
     breakout->move(left);
     
-    
-    
-    
-    
-    
-     lastX = translate.x;
+    lastX = translate.x;
     
     
     

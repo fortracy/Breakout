@@ -15,7 +15,7 @@ void main()
 
     if(chaos)
     {
-        float strength = 0.3;
+        float strength = 0.0;
         vec2 pos = vec2(texture1.x + sin(time) * strength, texture1.y + cos(time) * strength);
         TexCoords = pos;
     }
